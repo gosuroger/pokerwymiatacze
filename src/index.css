@@ -168,6 +168,13 @@ h1 { margin-bottom: 0; font-size: clamp(20px, 5vw, 27px); letter-spacing: -.035e
 .share-actions .primary-button { grid-column: 1 / -1; }
 .share-actions .secondary-button { font-size: 12px; }
 .final-footer { display: flex; justify-content: space-between; gap: 8px; margin-top: 14px; }
+.transfer-plan { margin: 14px 0; padding: 14px; border: 1px solid #375746; border-radius: 14px; background: #14231f; }
+.transfer-plan h2 { margin-bottom: 6px; font-size: 18px; }
+.transfer-plan p { margin-bottom: 8px; color: var(--muted); font-size: 12px; }
+.transfer-plan p:last-child { margin-bottom: 0; }
+.transfer-plan ol { margin: 12px 0; padding: 0; list-style: none; }
+.transfer-plan li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid #2c4036; font-size: 14px; overflow-wrap: anywhere; }
+.transfer-plan li strong { flex-shrink: 0; color: #86efac; }
 
 @media (min-width: 700px) {
   .players-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto; align-content: stretch; }

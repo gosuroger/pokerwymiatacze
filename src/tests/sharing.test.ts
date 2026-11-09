@@ -23,4 +23,7 @@ it('generuje pełne podsumowanie i krótki tekst samych sald', () => {
   expect(brief.replaceAll('\u00a0', ' ')).toContain('Kuba: +10,00 zł');
   expect(brief.replaceAll('\u00a0', ' ')).toContain('Adam: −10,00 zł');
   expect(brief).not.toContain('All-in');
+  expect(full.replaceAll('\u00a0', ' ')).toContain('Adam → Kuba: 10,00 zł');
+  expect(full).toContain('minimalna liczba: 1');
+  expect(brief).not.toContain('→');
 });

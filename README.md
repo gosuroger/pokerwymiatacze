@@ -62,4 +62,6 @@ Vite automatycznie pobiera nazwę repozytorium ze zmiennej `GITHUB_REPOSITORY` w
 
 ## Dane i bezpieczeństwo zapisu
 
+Wyniki zawierają plan przelewów od przegranych do wygranych. Aplikacja wyznacza minimalną liczbę przelewów dla maksymalnie 10 graczy, a przy remisie preferuje większą liczbę przelewów wychodzących kolejno u graczy z największą stratą. Przy jednakowej stracie pierwszeństwo ma kolejność uczestników w sesji. Po wykonaniu planu saldo każdego gracza wynosi dokładnie zero. Plan jest również dołączany do pełnych wyników kopiowanych i udostępnianych; „Kopiuj tylko salda” pozostaje bez zmian. Plan nie śledzi wykonania przelewów i nie zmienia zapisanych wyników gry.
+
 Sesja jest zapisywana pod kluczem `poker-bank-session-v1` w `localStorage` przeglądarki. Pozostaje dostępna po odświeżeniu na tym samym urządzeniu i w tej samej przeglądarce. Uszkodzony zapis nie jest automatycznie kasowany; aplikacja zgłasza problem i wymaga potwierdzenia przed jego zastąpieniem. Na ekranie końcowym można pobrać kopię sesji jako JSON.

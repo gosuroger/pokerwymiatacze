@@ -2,6 +2,7 @@ import type { GameSession } from '../types/game';
 import { calculateSettlement } from './calculations';
 import { formatSignedMoney, formatMoney } from './formatting';
 import type { Player } from '../data/players';
+import { calculateTransfers } from './transfers';
 
 export function buildFullResults(session: GameSession, profiles: Player[]): string {
   const totals = calculateSettlement(session);
@@ -19,6 +20,8 @@ export function buildFullResults(session: GameSession, profiles: Player[]): stri
   const winner = (totals.allInPoolGrosze ?? 0) > 0 && session.winnerPlayerId
     ? profiles.find((item) => item.id === session.winnerPlayerId)?.name ?? session.winnerPlayerId
     : 'Nie dotyczy';
+  const transfers = calculateTransfers(totals.rows);
+  const playerName = (id: string) => profiles.find((player) => player.id === id)?.name ?? id;
   return [
     `🃏 POKER — ${date}`,
     '',
@@ -30,6 +33,14 @@ export function buildFullResults(session: GameSession, profiles: Player[]): stri
     `🎯 Końcowy all-in: ${formatMoney(totals.allInPoolGrosze ?? 0)}`,
     `🏆 Zwycięzca all-ina: ${winner}`,
     `✅ Bilans: ${formatMoney(totals.finalBalanceGrosze ?? 0)}`,
+    '',
+    `💸 PRZELEWY — minimalna liczba: ${transfers.length}`,
+    ...(transfers.length
+      ? transfers.map((transfer) =>
+        `${playerName(transfer.fromPlayerId)} → ${playerName(transfer.toPlayerId)}: ${formatMoney(transfer.amountGrosze)}`,
+      )
+      : ['Wszyscy są rozliczeni — przelewy nie są potrzebne.']),
+    'Po wykonaniu przelewów saldo każdego gracza wyniesie 0 zł.',
   ].join('\n');
 }
 
